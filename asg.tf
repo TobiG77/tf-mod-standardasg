@@ -75,3 +75,9 @@ resource "aws_security_group" "standardasg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+# Create a new ALB Target Group attachment
+resource "aws_autoscaling_attachment" "asg_attachment" {
+  autoscaling_group_name = "${aws_autoscaling_group.standardasg.id}"
+  alb_target_group_arn   = "${aws_lb_target_group.standardasg.arn}"
+}
